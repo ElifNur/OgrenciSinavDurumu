@@ -48,6 +48,11 @@ public class OgrenciAdapter extends BaseAdapter {
         TextView txtVize= (TextView) satirView.findViewById(R.id.txtVize);
         TextView txtFinal= (TextView) satirView.findViewById(R.id.txtFinal);
         TextView txtDurum= (TextView) satirView.findViewById(R.id.txtDurum);
+        Ogrenci ogrenci = mogrenciler.get(position);
+        txtAdSoy.setText(ogrenci.getAd() + " " +ogrenci.getSoyad());
+        txtVize.setText(String.valueOf(ogrenci.getVize()));
+        txtFinal.setText(String.valueOf(ogrenci.getFinall()));
+        txtDurum.setText(ogrenci.getDurum() ? "GEÇTİ" : "KALDI");
         return satirView;
     }
 }

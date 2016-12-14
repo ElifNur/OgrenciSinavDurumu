@@ -43,17 +43,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        final FragmentTransaction ft = fm.beginTransaction();
 
-        ft.commit();
         btnDurum = (Button) findViewById(R.id.btnDurum);
         btnListele = (Button) findViewById(R.id.btnlistele);
 
         btnDurum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction ftdurum = fm.beginTransaction();
-                ftdurum.hide(fragmentKayit);
 
 
                 Ogrenci ogrenci = new Ogrenci();
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 ogrenci.setFinall(Integer.parseInt(etFinal.getText().toString()));
 
                 myDB.ekle(ogrenci);
-                ftdurum.commit();
+                ((FragmentKayit)fragmentKayit).durumFragmentGoster(ogrenci);
             }
         });
 
@@ -76,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 List<Ogrenci> ogrenciler = myDB.listele();
                 Intent intent =new Intent(MainActivity.this,ListeleActivity.class);
                 intent.putExtra("ogrenciler",(ArrayList<Ogrenci>) ogrenciler);
+                startActivity(intent);
 
             }
         });

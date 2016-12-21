@@ -1,12 +1,15 @@
 package com.example.elifnur.ogrencisinavdurumu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by elifnur on 13.12.2016.
@@ -28,7 +31,6 @@ public class MyDatBase extends SQLiteOpenHelper {
     }
 
 
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -36,20 +38,20 @@ public class MyDatBase extends SQLiteOpenHelper {
 
     public void ekle(Ogrenci ogrenci) {
         SQLiteDatabase db = getWritableDatabase();
-        String sorgu = String.format("insert into ogrenciler (ad,soyad,vize,final) values ('%s','%s',%d,%d)",ogrenci.getAd(), ogrenci.getSoyad(),ogrenci.getVize(), ogrenci.getFinall());
+        String sorgu = String.format("insert into ogrenciler (ad,soyad,vize,final) values ('%s','%s',%d,%d)", ogrenci.getAd(), ogrenci.getSoyad(), ogrenci.getVize(), ogrenci.getFinall());
         db.execSQL(sorgu);
-
 
 
     }
 
-    public List<Ogrenci> listele(){
+    public List<Ogrenci> listele() {
         List<Ogrenci> ogrenciler = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-       Cursor cursor =  db.rawQuery("select * from ogrenciler", null);
-
-        for(cursor.moveToFirst(); !cursor.isLast(); cursor.moveToNext()) {
+        Cursor cursor = db.rawQuery("select * from ogrenciler", null);
+        cursor.moveToFirst();
+        while (cursor.moveToNext() ){
             Ogrenci ogrenci = new Ogrenci();
+            ogrenci.setId(cursor.getInt(cursor.getColumnIndex("id")));
             ogrenci.setAd(cursor.getString(cursor.getColumnIndex("ad")));
             ogrenci.setSoyad(cursor.getString(cursor.getColumnIndex("soyad")));
             ogrenci.setVize(cursor.getInt(cursor.getColumnIndex("vize")));
@@ -60,5 +62,19 @@ public class MyDatBase extends SQLiteOpenHelper {
         }
         return ogrenciler;
     }
-}
 
+    public void sil(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        String sorgu = String.format("delete from ogrenciler where id=%d",id);
+        db.execSQL(sorgu);
+
+    }
+
+      public void guncelle(Ogrenci ogrenci){
+          SQLiteDatabase db=getReadableDatabase();
+          String sorgu= String.format("update ogrenciler set ad='%s',soyad='%s',vize=%d,final=%d where id=%d",ogrenci.getAd(), ogrenci.getSoyad(),ogrenci.getVize(),ogrenci.getFinall(),ogrenci.getId());
+          db.execSQL(sorgu);
+
+      }
+
+}

@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListeleActivity"></activity>
+        <activity android:name=".ListeleActivity" />
+        <activity android:name=".OgrenciGuncelle"></activity>
     </application>
 
 </manifest>

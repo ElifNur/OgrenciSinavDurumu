@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnDurum;
     private Button btnListele;
     private MyDatBase myDB;
-
     private EditText etAd;
     private EditText etSoyad;
     private EditText etVize;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDB = new MyDatBase(this);
+        myDB = new MyDatBase(this); //this bir Contex nesnesi
         etAd = (EditText)findViewById(R.id.etAd);
         etSoyad = (EditText)findViewById(R.id.etSoyad);
         etFinal = (EditText)findViewById(R.id.etFinal);
@@ -45,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnDurum = (Button) findViewById(R.id.btnDurum);
+
+
         btnListele = (Button) findViewById(R.id.btnlistele);
+
 
         btnDurum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 ((FragmentKayit)fragmentKayit).durumFragmentGoster(ogrenci);
             }
         });
-
 
 
 

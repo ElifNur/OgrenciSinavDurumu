@@ -27,4 +27,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtDurum"
         android:layout_weight="1" />
+
+    <Button
+        android:text="Sil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSil"
+        android:layout_weight="1" />
+
+    <Button
+        android:text="Güncelle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDuzenle"
+        android:layout_weight="1" />
+
 </LinearLayout>
